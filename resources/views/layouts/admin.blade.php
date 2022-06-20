@@ -174,7 +174,7 @@
           <img src="{{asset('images/'.Auth::user()->photo)}}" class="img-circle elevation-2" height="40px">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{Auth::user()->name}}</a>
+          <a href="{{route('user.profile',Auth::user()->slug)}}" class="d-block">{{Auth::user()->name}}</a>
         </div>
       </div>
         @if(session()->get('user')==Auth::user()->id)

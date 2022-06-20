@@ -12,7 +12,7 @@
                         <h2 class="subheading"></h2>
                         <span class="meta">
                                 Posted by
-                                <a href="{{route('user.profile',$post->user->id)}}">{{$post->user->name}}</a>
+                                <a href="{{route('user.profile',$post->user->slug)}}">{{$post->user->name}}</a>
                                 on {{$post->created_at}}
                             </span>
                     </div>

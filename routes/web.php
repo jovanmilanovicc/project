@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminPostsController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\HomneController;
 use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Mail;
@@ -41,7 +42,7 @@ Route::get('users/post/{slug}/edit',[HomneController::class,'edit'])->name('user
 Route::patch('users/post/{slug}/update',[HomneController::class,'update'])->name('users.posts.update');
 Route::delete('users/post/{slug}/delete',[HomneController::class,'destroy'])->name('users.posts.delete');
 Route::delete('post/comment/{id}/delete',[HomneController::class,'deleteComment'])->name('comment.delete');
-Route::post('comment/create/{post_id}',[HomneController::class,'commentCreate'])->name('comment.create');
+Route::post('comment/create/{id}',[HomneController::class,'commentCreate'])->name('comment.create');
 
 
 

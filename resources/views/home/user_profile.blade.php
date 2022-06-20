@@ -17,7 +17,7 @@
 
     <div class="mr-5 pr-5">
         <div class="col-sm m-5">
-            @if(session()->get('user')==Auth::user()->id)
+            @if(session()->get('user')==Auth::user()->id or Auth::user()->role=='admin')
                 <form action="{{route('profile.update',$user->slug)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
@@ -42,10 +42,21 @@
                             <button type="submit" class="btn btn-primary">Edit</button>
                         </div>
                     </div>
-
                 </form>
+                        @if(Auth::user()->role=='admin')
+                            <form action="{{route('admin.delete',$user->slug)}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                            <div class="form-group">
+                                <button type="submit" name="delete" class="btn btn-danger">Delete</button>
+                            </form>
+                            @endif
+
+
+
 
             @else
+                <div class="col-sm-5"></div>
             <form action="">
                 <div class="form-group">
                 <label for="username">Username:</label>
@@ -61,6 +72,7 @@
                 </div>
 
             </form>
+        </div>
             @endif
 
 

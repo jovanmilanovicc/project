@@ -69,10 +69,9 @@ class User extends Authenticatable
         return $this->uploads.$photo;
 
     }
+    protected $table = 'users';
 
-    public function posts(){
-        return $this->hasOne(Post::class);
-    }
+
     public function isAdmin()
     {
         if (Auth::user()->role == 'admin') {
@@ -81,5 +80,9 @@ class User extends Authenticatable
             return false;
         }
     }
+    public function post() {
+        return $this->hasOne(Post::class);
+    }
+
 
 }

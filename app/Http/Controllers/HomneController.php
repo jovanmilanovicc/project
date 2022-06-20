@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostUpdateRequest;
 use App\Http\Requests\ProfileUpdateRequest;
-use App\Models\Comments;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-use PhpParser\Comment;
+
 
 class HomneController extends Controller
 {
@@ -21,8 +21,8 @@ class HomneController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function home(){
-        $post=Post::paginate(4);
-        return view('home.home',['posts'=>$post]);
+        $posts=Post::paginate(10);
+        return view('home.home',compact('posts'));
     }
     public function index()
     {
@@ -59,7 +59,7 @@ class HomneController extends Controller
      */
     public function show($slug)
     {
-        $comment=Comments::all();
+        $comment=Comment::all();
         $post=Post::where('slug',$slug)->first();;
         return view('home.post',['post'=>$post,'comments'=>$comment]);
     }
@@ -119,7 +119,9 @@ class HomneController extends Controller
      */
     public function userProfile($slug){
         $user=User::where('slug',$slug)->first();
-        session()->put('user',$user->id);
+        if(session()->get('user')) {
+            session()->put('user', $user->id);
+        }
         return view('home.user_profile',compact('user'));
     }
     /**
@@ -193,7 +195,7 @@ class HomneController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function deleteComment($id){
-        $comment=Comments::findOrFail($id);
+        $comment=Comment::findOrFail($id);
         $comment->delete();
         return redirect()->back()->with('comment_deleted','Comment has been deleted');
 
@@ -209,7 +211,7 @@ class HomneController extends Controller
         $inputs=$request->all();
         $inputs['post_id']=$id;
         $inputs['author']=Auth::user()->username;
-        Comments::create($inputs);
+        Comment::create($inputs);
         return redirect()->back();
 
     }

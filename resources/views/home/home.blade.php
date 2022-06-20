@@ -19,13 +19,13 @@
                 @foreach($posts as $post)
                 <!-- Post preview-->
                 <div class="post-preview">
-                    <a href="{{route('post.detail',$post->id)}}">
+                    <a href="{{route('post.detail',$post->slug)}}">
                         <h2 class="post-title">{{$post->title}}</h2>
                         <h3 class="post-subtitle">{{substr($post->title,0,20)}}</h3>
                     </a>
                     <p class="post-meta">
                         Posted by
-                        <a href="{{route('user.profile',$post->user->id)}}">{{$post->user->name}}</a>
+                        <a href="{{route('user.profile',$post->user->slug)}}">{{$post->user->name}}</a>
                         on {{$post->created_at->diffForHumans()}}
                     </p>
                 </div>
@@ -33,6 +33,7 @@
                 <hr class="my-4" />
                 <!-- Post preview-->
                 @endforeach
+                {{$posts->links()}}
 
         </div>
     </div>

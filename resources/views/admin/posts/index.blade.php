@@ -71,7 +71,7 @@
                                     <tr>
                                         <td>{{$post->id}}</td>
                                         <td><img src="{{asset('images/'.$post->photo)}}" height="80px" width="100px"></td>
-                                        <td><a href="{{route('admin.posts.edit',$post->id)}}"> {{$post->title}}</a></td>
+                                        <td><a href="{{route('admin.posts.edit',$post->slug)}}"> {{$post->title}}</a></td>
                                         <td>{{$post->body}}</td>
                                         <td>{{$post->user->name}}</td>
                                         <td>{{$post->created_at->diffForHumans()}}</td>
